@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.spellcheckalgorithm.PopupController">
+    <GridPane fx:id="dpGrid" gridLinesVisible="true" style="-fx-padding: 10;">
+        <padding>
+            <Insets top="20" left="20" bottom="20" right="20"/>
+        </padding>
+        <columnConstraints>
+            <ColumnConstraints minWidth="40" prefWidth="50" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="40" prefHeight="50" />
+        </rowConstraints>
+    </GridPane>
+</VBox>
