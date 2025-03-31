@@ -4,22 +4,23 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class PopupController {
     @FXML
-    private GridPane dpGrid;  // GridPane to visualize the DP table
-
+    private GridPane dpGrid;
+    @FXML
+    private ScrollPane scrollPane;
     private String correctWord;
     private String givenWord;
 
     @FXML
     protected void setStrings(String correctWord, String givenWord) {
-        this.correctWord = correctWord;
-        this.givenWord = givenWord;
-
+        this.correctWord = correctWord.toLowerCase();
+        this.givenWord = givenWord.toLowerCase();
         animateDPTable();
     }
 
@@ -28,7 +29,6 @@ public class PopupController {
         int m = givenWord.length();
         int[][] dp = new int[m + 1][n + 1];
 
-        // Initialize the DP table for edit distance
         for (int i = 0; i <= m; i++) {
             for (int j = 0; j <= n; j++) {
                 if (i == 0) {
@@ -43,7 +43,6 @@ public class PopupController {
             }
         }
 
-        // Adding word characters in the grid's top row and left column
         for (int j = 1; j <= n; j++) {
             Label charLabel = new Label(String.valueOf(correctWord.charAt(j - 1)));
             styleCharLabel(charLabel);
@@ -55,11 +54,9 @@ public class PopupController {
             dpGrid.add(charLabel, 0, i);
         }
 
-        // Timeline to animate each DP cell fill
         Timeline timeline = new Timeline();
-        int animationSpeed = 300;  // milliseconds per cell animation
+        int animationSpeed = 100;
 
-        // Animate filling of each DP cell with delay using KeyFrames
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 final int row = i, col = j;
@@ -73,10 +70,9 @@ public class PopupController {
             }
         }
 
-        timeline.play();  // Play the animation
+        timeline.play();
     }
 
-    // Method to style the character labels
     private void styleCharLabel(Label label) {
         label.setStyle("-fx-border-color: black; -fx-alignment: center; -fx-padding: 10;");
         label.setFont(new Font("Arial", 20));  // Larger font for visibility
@@ -84,7 +80,6 @@ public class PopupController {
         label.setMaxSize(40, 40);
     }
 
-    // Method to style DP cell labels
     private void styleDPLabel(Label label) {
         label.setStyle("-fx-font-size: 16px; -fx-padding: 5px; -fx-border-color: black; -fx-background-color: lightblue;");
         label.setMinSize(40, 40);  // Increase DP cell size

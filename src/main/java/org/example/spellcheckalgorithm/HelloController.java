@@ -24,30 +24,26 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() throws Exception {
         output.getItems().clear();
-        welcomeText.setText("Enter a word to check if it is correct");
         String s = input.getText().toLowerCase();
         List<String> topSuggestions = WagnerFischerAlgo.spellCheck(s);
         output.getItems().addAll(topSuggestions);
     }
     @FXML
     public void initialize() {
-        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        output.setItems(items);
-
+        welcomeText.setText("Enter a word to check if it is correct");
         output.setCellFactory(listView -> new CustomListCell());
     }
 
     protected class CustomListCell extends ListCell<String> {
         private final HBox hBox = new HBox();
         private final Label label = new Label();
-        private final Button button = new Button("Click me");
+        private final Button button = new Button("How?");
         public CustomListCell() {
             super();
             hBox.setSpacing(10);
             hBox.getChildren().addAll(label, button);
 
             button.setOnAction(event -> {
-                System.out.println(label.getText() + " clicked");
                 try{
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popup.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 320, 240);

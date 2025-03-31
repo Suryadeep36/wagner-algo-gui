@@ -64,6 +64,7 @@ public class WagnerFischerAlgo {
         String filePath = "/Users/gohilsuryadeepsinh/Desktop/Web Development /Java Serverlet/Spell-Check-Algorithm/src/main/java/org/example/spellcheckalgorithm/words.txt";
         List<String> dictionary = loadDictionary(filePath);
         for (String correctWord : dictionary) {
+            correctWord = correctWord.toLowerCase();
             int distance = wagnerFischer(misspelledWord, correctWord);
             suggestions.add(new WordDistance(correctWord, distance));
         }
